@@ -18,9 +18,15 @@ function searchCountry(){
             return;
         }
         const countryName = box.value.trim();
-    fetchCountries(countryName)
+fetchCountries(countryName)
         .then(countriesListOk)
-        .catch(countriesListError)
+        .catch(countriesListFailure)
+};
+
+function countriesListFailure(){
+    if(countries.length === 0){
+   Notiflix.Notify.failure('Oops, there is no country with that name');
+    }
 };
 
 function countriesListOk(countries) {
@@ -29,12 +35,12 @@ function countriesListOk(countries) {
             list.innerHTML = '';
             info.innerHTML = '';
         }
-        if (countries.length > 1 && countries.length <= 10) {
+        else if (countries.length > 1 && countries.length <= 10) {
             const countriesList = countries.map(country => countryItem(country)).join('');
             list.innerHTML = countriesList;
             info.innerHTML = '';
         } 
-        if (countries.length === 1) {
+        else if (countries.length === 1) {
             const countriesCards = countries.map(country => countryСard(country)).join('');
             list.innerHTML = '';
             info.innerHTML = countriesCards;
@@ -63,12 +69,6 @@ function countriesListOk(countries) {
             </ul>`;
       };
 
-function countriesListError(){
-   Notiflix.Notify.failure('Oops, there is no country with that name');
-    //list.innerHTML = '';
-    //info.innerHTML = '';
-    return;
-};
 
 
  
