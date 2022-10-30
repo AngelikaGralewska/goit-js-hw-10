@@ -7,14 +7,12 @@ function fetchCountries (name) {
     const filters = "name,capital,population,flags,languages"
 
     return fetch(`${COUNTRIES_BASE}/${name}?fields=/${filters}`)
-    .then((response) => {
-        const countriesData = response.json();
-        return countriesData;
-    })
-    .then((recivedCountriesData) => {
-        const countriesData = recivedCountriesData;
-        return recivedCountriesData;
-    })
-};
+    .then(response => {
+        if (!response.ok) {
+        throw new Error(response.status);
+        }
+        return response.json();
+    });
+  }
 
 export { fetchCountries };
