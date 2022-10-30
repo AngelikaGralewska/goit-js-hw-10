@@ -20,14 +20,9 @@ function searchCountry(){
         const countryName = box.value.trim();
 fetchCountries(countryName)
         .then(countriesListOk)
-        .catch(countriesListFailure)
+        .catch(Notiflix.Notify.failure('Oops, there is no country with that name'))
 };
 
-function countriesListFailure(){
-    if(countries.length === 0){
-   Notiflix.Notify.failure('Oops, there is no country with that name');
-    }
-};
 
 function countriesListOk(countries) {
         if (countries.length > 10) {
