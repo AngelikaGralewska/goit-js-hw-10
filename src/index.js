@@ -12,13 +12,13 @@ const info = document.querySelector('.country-info');
 box.addEventListener('input', debounce(searchCountry, DEBOUNCE_DELAY));
 
 function searchCountry(){
-    const name = box.value.trim();
-        if (name === ''){
+        if (box.value === ''){
             list.innerHTML = '';
             info.innerHTML = '';
             return;
         }
-    fetchCountries(name)
+        const countryName = box.value.trim();
+    fetchCountries(countryName)
         .then(countriesListOk)
         .catch(countriesListError)
 };
@@ -44,8 +44,8 @@ function countriesListOk(countries) {
       function countryItem({ flags, name }) {
         return `
         <li class="country-list_item">
-          <img " src="${flags.svg}" alt="${name.official}" width="25" />
-          <h3 >${name.official}</h3>
+          <img " src="${flags.svg}" alt="${name.official}" width="20" />
+          <h5 >${name.official}</h5>
         </li>`;
       }
       
