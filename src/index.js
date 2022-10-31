@@ -20,8 +20,15 @@ function searchCountry(){
         const countryName = box.value.trim();
 fetchCountries(countryName)
         .then(countriesListOk)
-        .catch(Notiflix.Notify.failure('Oops, there is no country with that name'))
-};
+        .catch((error => {
+            list.innerHTML = "";
+            info.innerHTML = "";
+            console.log(error);
+        }));
+      };
+      
+
+
 
 
 function countriesListOk(countries) {
@@ -39,7 +46,11 @@ function countriesListOk(countries) {
             const countriesCards = countries.map(country => countryСard(country)).join('');
             list.innerHTML = '';
             info.innerHTML = countriesCards;
-      }};
+        }
+        else{
+            Notiflix.Notify.failure("Oops, there is no country with that name");
+        }
+    };
 
       function countryItem({ flags, name }) {
         return `
